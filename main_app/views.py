@@ -41,5 +41,5 @@ def get_game():
 
 class GameCreate(CreateView):
     model = UserGame
-    fields = ['name', 'rating', 'status']
+    fields = ['name', 'cover', 'rating', 'status']
     success_url = '/games/{id}'

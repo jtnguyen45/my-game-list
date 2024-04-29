@@ -66,6 +66,10 @@ p {
 }
 
 .img-index {
-    height: 240px;
+    height: 207px;
     width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #06213e;
 }
