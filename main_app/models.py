@@ -24,7 +24,7 @@ class UserGame(models.Model):
     status = models.CharField(choices=STATUS_OPTIONS, default='1')
 
     def __str__(self):
-        return self.get_status_display()
+        return self.name
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'game_id': self.id})

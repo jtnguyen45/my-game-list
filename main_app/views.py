@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import UserGame
-import requests
-import environ
+import requests, environ
 env = environ.Env()
 env.read_env()
 
@@ -16,6 +15,12 @@ def games_index(request):
     games = UserGame.objects.all()
     return render(request, 'games/index.html', {
         'games': games
+    })
+
+def games_detail(request, game_id):
+    game = UserGame.objects.get(id=game_id)
+    return render(request, 'games/detail.html', {
+        'game': game,
     })
 
 

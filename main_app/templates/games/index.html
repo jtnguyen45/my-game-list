@@ -5,13 +5,10 @@
 <h1>All My Games</h1>
 <a href=""><button>Add Game</button></a>
 {% for game in games %}
-<div class="card">
-    <a href="">
-        <div class="card-content">
-            <span class="card-title">{{ game.name }}</span>
-            <p>Summary: {{ game.summary }}</p>
-            <p>Rating: {{ game.rating }}</p>
-            <p>Status: {{ game.get_status_display }}</p>
+<div class="card img-index">
+    <a href="{% url 'detail' game.id %}">
+        <div class="card-image">
+            <img src="https://m.media-amazon.com/images/M/MV5BYmZiMWNlOWMtODMyNi00ZThiLTk0ZjYtOTQwMGRiNzE2NjFhXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_FMjpg_UX1000_.jpg">
         </div>
     </a>
 </div>
