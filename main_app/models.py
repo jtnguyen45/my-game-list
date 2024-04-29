@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Game(models.Model):
     api_id = models.CharField()
@@ -24,6 +25,7 @@ class UserGame(models.Model):
     cover = models.TextField(default='https://i.pinimg.com/736x/64/9d/37/649d37014bd486376f3f8552a1f049d8.jpg')
     rating = models.CharField(choices=RATING_OPTIONS, null=True, blank=True)
     status = models.CharField(choices=STATUS_OPTIONS, default='1')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

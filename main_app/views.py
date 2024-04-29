@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UserGame
 from django.views.generic.edit import CreateView
 import requests, environ
@@ -12,18 +16,38 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def games_index(request):
-    games = UserGame.objects.all()
+    games = UserGame.objects.filter(user=request.user)
     return render(request, 'games/index.html', {
         'games': games
     })
 
+@login_required
 def games_detail(request, game_id):
     game = UserGame.objects.get(id=game_id)
     return render(request, 'games/detail.html', {
         'game': game,
     })
 
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def get_game():
     url = 'https://api.igdb.com/v4/games'
@@ -39,7 +63,11 @@ def get_game():
         return None
     
 
-class GameCreate(CreateView):
+class GameCreate(LoginRequiredMixin, CreateView):
     model = UserGame
     fields = ['name', 'cover', 'rating', 'status']
     success_url = '/games/{id}'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
