@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import UserGame
+from django.views.generic.edit import CreateView
 import requests, environ
 env = environ.Env()
 env.read_env()
@@ -30,9 +31,15 @@ def get_game():
         'Client-ID': env('IGDB_CLIENT_ID'),
         'Authorization': env('IGDB_ACCESS_TOKEN'),
     }
-    body = 'fields *;'
+    body = 'search "Harvest Moon"; fields *;'
     response = requests.post(url, headers=headers, data=body)
     if response.status_code == 200:
         return response.json()
     else:
         return None
+    
+
+class GameCreate(CreateView):
+    model = UserGame
+    fields = ['name', 'rating', 'status']
+    success_url = '/games/{id}'

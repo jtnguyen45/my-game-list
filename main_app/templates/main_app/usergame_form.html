@@ -15,4 +15,10 @@
     <input type="submit" value="Submit" class="btn amber lighten-2">
 </form>
 
+<script>
+    const ratingEl = document.getElementById('id_rating');
+    M.FormSelect.init(ratingEl);
+    const statusEl = document.getElementById('id_status');
+    M.FormSelect.init(statusEl);
+</script>
 {% endblock %}

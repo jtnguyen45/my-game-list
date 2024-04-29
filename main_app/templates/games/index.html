@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>All My Games</h1>
-<a href=""><button>Add Game</button></a>
+<a href="{% url 'games_create' %}"><button>Add Game</button></a>
 {% for game in games %}
 <div class="card img-index">
     <a href="{% url 'detail' game.id %}">
