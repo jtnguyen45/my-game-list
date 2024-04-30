@@ -6,12 +6,26 @@
 <a href="{% url 'games_create' %}"><button>Add Game</button></a>
 
 <div class="index-container">
+    <div class="index-grid">
+        {% for game in games %}
+        <div class="index-cell">
+            <a href="{% url 'detail' game.id %}">
+                <div class="card-image index-img">
+                    <img src="{{ game.cover }}">
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- <div class="index-container">
     <table class="index-table">
         <tr>
             {% for game in games %}
             <td class="index-cell">
                 <a href="{% url 'detail' game.id %}">
-                    <div class="card-image">
+                    <div class="card-image index-img">
                         <img src="{{ game.cover }}">
                     </div>
                 </a>
@@ -22,6 +36,6 @@
             {% endfor %}
         </tr>
     </table>
-</div>
+</div> -->
 
 {% endblock %}
