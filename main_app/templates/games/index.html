@@ -4,14 +4,24 @@
 
 <h1>All My Games</h1>
 <a href="{% url 'games_create' %}"><button>Add Game</button></a>
-{% for game in games %}
-<div class="card img-index">
-    <a href="{% url 'detail' game.id %}">
-        <div class="card-image">
-            <img src="{{ game.cover }}">
-        </div>
-    </a>
+
+<div class="index-container">
+    <table class="index-table">
+        <tr>
+            {% for game in games %}
+            <td class="index-cell">
+                <a href="{% url 'detail' game.id %}">
+                    <div class="card-image">
+                        <img src="{{ game.cover }}">
+                    </div>
+                </a>
+            </td>
+            {% if forloop.counter|divisibleby:5 and not forloop.last %}
+                </tr><tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
 </div>
-{% endfor %}
 
 {% endblock %}
