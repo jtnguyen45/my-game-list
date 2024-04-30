@@ -32,3 +32,11 @@ class UserGame(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'game_id': self.id})
+    
+class Note(models.Model):
+    title = models.CharField()
+    note = models.TextField(max_length=350)
+    date = models.DateField('note date')
+
+    def __str__(self):
+        return f'{self.title} on {self.date}'
