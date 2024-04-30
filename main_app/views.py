@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UserGame
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import requests, environ
 env = environ.Env()
 env.read_env()
@@ -71,3 +71,11 @@ class GameCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+class GameUpdate(LoginRequiredMixin, UpdateView):
+    model = UserGame
+    fields = ['rating', 'status']
+
+class GameDelete(LoginRequiredMixin, DeleteView):
+    model = UserGame
+    success_url = '/games'

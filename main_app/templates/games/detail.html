@@ -7,6 +7,10 @@
         <div class="row">
             <div class="col s4 image-container">
                 <img src="{{ game.cover }}">
+                <div class="card-action center">
+                    <a href="{% url 'games_update' game.id %}">Edit</a>
+                    <a href="{% url 'games_delete' game.id %}">Delete</a>
+                </div>
             </div>
             <div class="col s8">
                 <span class="card-title">{{ game.name }}</span>
