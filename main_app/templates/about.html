@@ -1,8 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+
 <h1>About My Game List</h1>
-<hr>
-<p>Hi there! My name is Jessica and I love video games.</p>
-<p>I have been playing games since I was 5 years old and have played so many games!</p>
-<p>This app is designed to keep track of your video game collection.</p>
+<div class="card about-container">
+    <div class="card-content">
+        <div class="row">
+            <div class="col s3 image-container">
+                <img src="{% static 'images/profilePic.jpeg' %}">
+                <p><em>@smolcronch</em></p>
+                <div class="row game-rank">
+                    <img src="https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e5/IconGrade_survivorIridescent_I.png/revision/latest/scale-to-width-down/250?cb=20210904115342">
+                    <img src="https://www.unrankedsmurfs.com/images/valorant/account-page/gold_big.png">
+                    <img src="https://static.wikia.nocookie.net/leagueoflegends/images/7/78/Season_2023_-_Gold.png/revision/latest/scale-to-width-down/250?cb=20231007195829">
+                </div>
+            </div>
+            <div class="col s9 about-content">
+                <p>Hi there! My name is Jessica and I created My Game List to make it easier for gamers to keep track of their video game collection and connect with other gamers. I love video games and have been playing them since I was 5 years old.</p>
+                <br>
+                <p>MGL aims to make it easier to manage all your games and lets you make notes and upload images of your gameplay. We use <a href="https://www.igdb.com/">IGDB API</a> to get all the up-to-date information on all the video games out there.</p>
+                <br>
+                <p>Enjoy your adventure, gamers!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
