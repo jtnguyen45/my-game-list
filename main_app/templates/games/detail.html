@@ -30,7 +30,7 @@
                             <span>{{ note.note }}</span><br>
                             <a href="{% url 'edit_note' game.id note.id %}">Edit</a>
                             &nbsp;
-                            <a href="">Delete</a>
+                            <a href="{% url 'delete_note' game.id note.id %}">Delete</a>
                         </div>
                     </li>
                     {% endfor %}

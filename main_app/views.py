@@ -77,6 +77,12 @@ def edit_note(request, game_id, note_id):
         'game': game,
     })
 
+@login_required
+def delete_note(request, game_id, note_id):
+    note = Note.objects.get(id=note_id)
+    note.delete()
+    return redirect('detail', game_id=game_id)
+
 def get_game():
     url = 'https://api.igdb.com/v4/games'
     headers = {
