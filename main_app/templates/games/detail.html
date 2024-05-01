@@ -13,21 +13,24 @@
                 </div>
             </div>
             <div class="col s8">
-                <span class="card-title">{{ game.name }}</span>
-                <p>Summary: {{ game.summary }}</p>
+                <span class="card-title"><b>{{ game.name }}</b></span>
+                <p><b>Summary:</b> {{ game.summary }}</p>
                 <br>
-                <p>Rating: {{ game.rating }}/5</p>
-                <p>Status: {{ game.get_status_display }}</p>
+                <p><b>Rating:</b> {{ game.rating }}/5</p>
+                <p><b>Status:</b> {{ game.get_status_display }}</p>
                 <br>
 
                 <ul class="collapsible expandable">
                     {% for note in game.note_set.all %}
                     <li>
                         <div class="collapsible-header">
-                            {{ note.title }}
+                            <span>{{ note.title }}</span>
                         </div>
                         <div class="collapsible-body white">
-                            <span>{{ note.note }}</span>
+                            <span>{{ note.note }}</span><br>
+                            <a href="{% url 'edit_note' game.id note.id %}">Edit</a>
+                            &nbsp;
+                            <a href="">Delete</a>
                         </div>
                     </li>
                     {% endfor %}

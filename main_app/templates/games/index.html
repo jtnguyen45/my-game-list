@@ -19,23 +19,4 @@
     </div>
 </div>
 
-<!-- <div class="index-container">
-    <table class="index-table">
-        <tr>
-            {% for game in games %}
-            <td class="index-cell">
-                <a href="{% url 'detail' game.id %}">
-                    <div class="card-image index-img">
-                        <img src="{{ game.cover }}">
-                    </div>
-                </a>
-            </td>
-            {% if forloop.counter|divisibleby:5 and not forloop.last %}
-                </tr><tr>
-            {% endif %}
-            {% endfor %}
-        </tr>
-    </table>
-</div> -->
-
 {% endblock %}

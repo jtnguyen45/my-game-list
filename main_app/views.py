@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import UserGame
+from .models import UserGame, Note
 from .forms import NoteForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import requests, environ
@@ -61,6 +61,21 @@ def add_note(request, game_id):
         new_note.user_game = game
         new_note.save()
     return redirect('detail', game_id=game_id)
+
+@login_required
+def edit_note(request, game_id, note_id):
+    game = UserGame.objects.get(id=game_id)
+    note = Note.objects.get(id=note_id)
+    form = NoteForm(request.POST, instance=note)
+    if form.is_valid():
+        form.save()
+        return redirect('detail', game_id=game_id)
+    else:
+        form = NoteForm(instance=note)
+    return render(request, 'main_app/edit_note.html', {
+        'form': form,
+        'game': game,
+    })
 
 def get_game():
     url = 'https://api.igdb.com/v4/games'

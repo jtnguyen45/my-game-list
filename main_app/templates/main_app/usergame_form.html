@@ -7,13 +7,19 @@
     <h1>Add Game</h1>
 {% endif %}
 
-<form action="" method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" class="btn amber lighten-2">
-</form>
+<div class="card">
+    <div class="card-content">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Submit" class="btn right">
+        </form>
+        <br>
+        <br>
+    </div>
+</div>
 
 <script>
     const ratingEl = document.getElementById('id_rating');
