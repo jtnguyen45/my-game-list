@@ -18,9 +18,47 @@
                 <br>
                 <p>Rating: {{ game.rating }}/5</p>
                 <p>Status: {{ game.get_status_display }}</p>
+                <br>
+
+                <ul class="collapsible expandable">
+                    {% for note in game.note_set.all %}
+                    <li>
+                        <div class="collapsible-header">
+                            {{ note.title }}
+                        </div>
+                        <div class="collapsible-body white">
+                            <span>{{ note.note }}</span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    <li>
+                        <div class="collapsible-header">
+                            <p>Add a note</p>
+                        </div>
+                        <div class="collapsible-body white">
+                            <form action="{% url 'add_note' game.id %}" method="POST">
+                                {% csrf_token %}
+                                {{ note_form.as_p }}
+                                <input type="submit" class="btn right" value="Add Note">
+                            </form>
+                            <br>
+                            <br>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elem = document.querySelector('.collapsible.expandable');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+        });
+    });
+    instances.open();
+</script>
 
 {% endblock %}

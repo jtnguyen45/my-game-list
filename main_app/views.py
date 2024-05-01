@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UserGame
+from .forms import NoteForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import requests, environ
 env = environ.Env()
@@ -15,20 +16,6 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
-
-@login_required
-def games_index(request):
-    games = UserGame.objects.filter(user=request.user)
-    return render(request, 'games/index.html', {
-        'games': games
-    })
-
-@login_required
-def games_detail(request, game_id):
-    game = UserGame.objects.get(id=game_id)
-    return render(request, 'games/detail.html', {
-        'game': game,
-    })
 
 def signup(request):
     error_message = ''
@@ -48,6 +35,32 @@ def signup(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+@login_required
+def games_index(request):
+    games = UserGame.objects.filter(user=request.user)
+    return render(request, 'games/index.html', {
+        'games': games
+    })
+
+@login_required
+def games_detail(request, game_id):
+    game = UserGame.objects.get(id=game_id)
+    note_form = NoteForm()
+    return render(request, 'games/detail.html', {
+        'game': game,
+        'note_form': note_form,
+    })
+
+@login_required
+def add_note(request, game_id):
+    form = NoteForm(request.POST)
+    if form.is_valid():
+        game = UserGame.objects.get(id=game_id)
+        new_note = form.save(commit=False)
+        new_note.user_game = game
+        new_note.save()
+    return redirect('detail', game_id=game_id)
 
 def get_game():
     url = 'https://api.igdb.com/v4/games'
