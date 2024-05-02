@@ -1,12 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Welcome to My Game List</h1>
-    <h3>Games</h3>
-    <ul>
-        {% for game in games_data %}
-            <li>Name: {{ game.name }}</li>
-            <li>Summary: {{ game.summary }}</li>
-            <li>Storyline: {{ game.storyline }}</li>
-        {% endfor %}
-    </ul>
+    <div class="home-splash-art">
+        <img src="https://cdnb.artstation.com/p/assets/images/images/050/699/467/large/sora-kim-ocean-song-seraphine-prestige-edition-skin-splash-art.jpg?1655466039">
+    </div>
+    <br>
 {% endblock %}

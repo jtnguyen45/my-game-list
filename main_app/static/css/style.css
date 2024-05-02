@@ -68,6 +68,17 @@ p {
     margin-top: 10px;
 }
 
+.home-splash-art {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.home-splash-art img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 .image-container {
     max-width: 100%;
     max-height: 100%;
@@ -118,6 +129,15 @@ p {
 .index-img img:hover {
     transform: translateY(-1vmin);
 }
+
+.user-game-dropdown-content {
+    display: none;
+    background-color: #381775;
+}
+
+.user-game-dropdown:hover .user-game-dropdown-content {
+    display: block;
+  }
 
 @media only screen and (max-width: 800px) {
     .index-cell {
