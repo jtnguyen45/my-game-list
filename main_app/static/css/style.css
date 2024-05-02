@@ -2,6 +2,13 @@
 
 body {
     background-image: url('../images/vaporwaveBackground.png');
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 h1 {
@@ -154,7 +161,16 @@ p {
 
 .user-game-dropdown:hover .user-game-dropdown-content {
     display: block;
-  }
+}
+
+.footer.page-footer {
+    padding-top: 0;
+    text-align: right;
+}
+
+.page-footer {
+    background-color: #381775;
+}
 
 @media only screen and (max-width: 800px) {
     .index-cell {
