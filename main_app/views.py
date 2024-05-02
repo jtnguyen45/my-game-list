@@ -11,11 +11,14 @@ env = environ.Env()
 env.read_env()
 
 def home(request):
-    games_data = get_game() #test connection to api, TODO: remove
-    return render(request, 'home.html', {'games_data': games_data})
+    return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')
+
+def all_games(request):
+    games_data = get_game("Harvest Moon")
+    return render(request, 'all_games.html', { 'games_data': games_data})
 
 def signup(request):
     error_message = ''
@@ -83,23 +86,50 @@ def delete_note(request, game_id, note_id):
     note.delete()
     return redirect('detail', game_id=game_id)
 
-def get_game():
-    url = 'https://api.igdb.com/v4/games'
+def get_game(user_str):
+    url_games = 'https://api.igdb.com/v4/games'
+    url_covers = 'https://api.igdb.com/v4/covers'
     headers = {
         'Client-ID': env('IGDB_CLIENT_ID'),
         'Authorization': env('IGDB_ACCESS_TOKEN'),
     }
-    body = 'search "Harvest Moon"; fields *;'
-    response = requests.post(url, headers=headers, data=body)
-    if response.status_code == 200:
-        return response.json()
+    game_body = f'search "{user_str}"; fields *;'
+    cover_body = 'fields image_id'
+
+    game_response = requests.post(url_games, headers=headers, data=game_body)
+    if game_response.status_code == 200:
+        game_data = game_response.json()
     else:
         return None
-    
+
+    cover_ids = []
+    for game in game_data:
+        game_id = game.get('cover')
+        cover_ids.append(game_id)
+
+    cover_responses = []
+    for cover_id in cover_ids:
+        cover_body_with_id = f'where id = {cover_id}; fields *;'
+        cover_response = requests.post(url_covers, headers=headers, data=cover_body_with_id)
+        if cover_response.status_code == 200:
+            cover_data = cover_response.json()
+            cover_responses.append(cover_data)
+        else:
+            cover_responses.append(None)
+
+    game_with_covers = []
+    for game, cover_response in zip(game_data, cover_responses):
+        if cover_response and len(cover_response) > 0:
+            game['cover_image_id'] = cover_response[0]['image_id']
+        else:
+            game['cover_image_id'] = None
+        game_with_covers.append(game)
+
+    return game_with_covers
 
 class GameCreate(LoginRequiredMixin, CreateView):
     model = UserGame
-    fields = ['name', 'cover', 'rating', 'status']
+    fields = ['name', 'summary', 'cover', 'rating', 'status']
     success_url = '/games/{id}'
 
     def form_valid(self, form):

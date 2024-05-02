@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="index-container">
+    <div class="index-grid">
+        {% for game in games_data %}
+            <div class="index-cell">
+                <a href="{% url 'detail' game.id %}">
+                    <div class="card-image index-img">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{game.cover_image_id}}.png">
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
