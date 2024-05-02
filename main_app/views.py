@@ -47,6 +47,13 @@ def games_index(request):
     })
 
 @login_required
+def not_started(request):
+    games = UserGame.objects.filter(user=request.user)
+    return render(request, 'games/not_started.html', {
+        'games': games
+    })
+
+@login_required
 def games_detail(request, game_id):
     game = UserGame.objects.get(id=game_id)
     note_form = NoteForm()

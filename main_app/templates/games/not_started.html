@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Games Not Started</h1>
+
+<div class="index-container">
+    <div class="index-grid">
+        {% for game in games %}
+            {% if game.status == '1' %}
+            <div class="index-cell">
+                <a href="{% url 'detail' game.id %}">
+                    <div class="card-image index-img">
+                        <img src="{{ game.cover }}">
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
