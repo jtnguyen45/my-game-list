@@ -24,7 +24,7 @@
                     {% for note in game.note_set.all %}
                     <li>
                         <div class="collapsible-header">
-                            <span>{{ note.title }}</span>
+                            <span>{{ note.title }} on {{ note.date }}</span>
                         </div>
                         <div class="collapsible-body white">
                             <span>{{ note.note }}</span><br>
