@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col s4 image-container">
                 <img src="{{ game.cover }}">
-                <div class="card-action center">
-                    <a href="{% url 'games_update' game.id %}">Edit</a>
-                    <a href="{% url 'games_delete' game.id %}">Delete</a>
+                <div class="card-action center detail-link">
+                    <a href="{% url 'games_update' game.id %}"><button>Edit</button></a>
+                    <a href="{% url 'games_delete' game.id %}"><button>Delete</button></a>
                 </div>
             </div>
             <div class="col s8">

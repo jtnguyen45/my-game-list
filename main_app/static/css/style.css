@@ -131,6 +131,22 @@ p {
     transform: translateY(-1vmin);
 }
 
+.detail-link button {
+    padding: 4px 8px;
+    border-radius: 2vmin;
+    border-color: #381775;
+    font-family: "Jersey 20", sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #b898f1;
+}
+
+.detail-link button:hover {
+    color: #b898f1;
+    background-color: #381775;
+    transform: translateY(-0.5vmin);
+}
+
 .user-game-dropdown-content {
     display: none;
     background-color: #381775;
