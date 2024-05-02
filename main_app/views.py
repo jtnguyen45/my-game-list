@@ -18,7 +18,11 @@ def about(request):
 
 def all_games(request):
     games_data = get_game("Harvest Moon")
-    return render(request, 'all_games.html', { 'games_data': games_data})
+    return render(request, 'all_games.html', { 'games_data': games_data })
+
+def search_game(request):
+    games_data = get_game(request.POST.get('search-term'))
+    return render(request, 'all_games.html', { 'games_data': games_data })
 
 def signup(request):
     error_message = ''

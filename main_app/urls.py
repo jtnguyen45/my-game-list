@@ -6,6 +6,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('games/', views.games_index, name='index'),
     path('all_games/', views.all_games, name='all_games'),
+    path('all_games/search', views.search_game, name='search_game'),
     path('games/not_started/', views.not_started, name='not_started'),
     path('games/in_progress', views.in_progress, name='in_progress'),
     path('games/<int:game_id>/', views.games_detail, name='detail'),
