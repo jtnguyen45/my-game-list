@@ -65,6 +65,13 @@ def in_progress(request):
     })
 
 @login_required
+def finished(request):
+    games = UserGame.objects.filter(user=request.user)
+    return render(request, 'games/finished.html', {
+        'games': games
+    })
+
+@login_required
 def games_detail(request, game_id):
     game = UserGame.objects.get(id=game_id)
     note_form = NoteForm()
