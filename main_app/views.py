@@ -17,7 +17,7 @@ def about(request):
     return render(request, 'about.html')
 
 def all_games(request):
-    games_data = get_game("Harvest Moon")
+    games_data = get_game('Harvest Moon')
     return render(request, 'all_games.html', { 'games_data': games_data })
 
 def search_game(request):
@@ -134,7 +134,6 @@ def get_game(user_str):
         'Authorization': env('IGDB_ACCESS_TOKEN'),
     }
     game_body = f'search "{user_str}"; fields *;'
-    cover_body = 'fields image_id'
 
     game_response = requests.post(url_games, headers=headers, data=game_body)
     if game_response.status_code == 200:

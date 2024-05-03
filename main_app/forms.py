@@ -10,5 +10,5 @@ class NoteForm(ModelForm):
         model = Note
         fields = ('title', 'date', 'note',)
         widgets = {
-            "date": DateInput()
+            'date': DateInput()
         }

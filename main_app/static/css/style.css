@@ -14,11 +14,11 @@ main {
 h1 {
     color: #ffffff;
     font-size: 48px;
-    font-family: "Jersey 20", sans-serif;
+    font-family: 'Jersey 20', sans-serif;
 }
 
 p {
-    font-family: "Fira Sans", sans-serif;
+    font-family: 'Fira Sans', sans-serif;
 }
 
 .header-img {
@@ -44,7 +44,7 @@ p {
     color: white;
     text-shadow: 0 0 5px #ffffff, 0 0 10px #ff0062;
     font-size: 54px;
-    font-family: "Jersey 20", sans-serif;
+    font-family: 'Jersey 20', sans-serif;
 }
 
 .header-content p:hover {
@@ -54,7 +54,7 @@ p {
 }
 
 .nav-wrapper {
-    font-family: "Jersey 20", sans-serif;
+    font-family: 'Jersey 20', sans-serif;
 }
 
 .nav-wrapper a {
@@ -181,6 +181,10 @@ input:focus {
 }
 
 label.active {
+    color: royalblue !important;
+}
+
+label {
     color: royalblue !important;
 }
 
