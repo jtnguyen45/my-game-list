@@ -73,6 +73,7 @@ p {
 
 .btn {
     margin-top: 10px;
+    background-color: #381775;
 }
 
 .home-splash-art {
@@ -157,6 +158,8 @@ p {
 .user-game-dropdown-content {
     display: none;
     background-color: #381775;
+    position: relative;
+    z-index: 1000;
 }
 
 .user-game-dropdown:hover .user-game-dropdown-content {
@@ -170,6 +173,15 @@ p {
 
 .page-footer {
     background-color: #381775;
+}
+
+input:focus {
+    border-bottom: 1px solid royalblue !important;
+    box-shadow: 0 1px 0 0 royalblue !important;
+}
+
+label.active {
+    color: royalblue !important;
 }
 
 @media only screen and (max-width: 800px) {

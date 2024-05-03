@@ -3,10 +3,10 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import UserGame, Note
+from .models import UserGame, Note, Photo
 from .forms import NoteForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-import requests, environ
+import requests, environ, uuid, boto3, os
 env = environ.Env()
 env.read_env()
 
@@ -102,6 +102,21 @@ def edit_note(request, game_id, note_id):
 def delete_note(request, game_id, note_id):
     note = Note.objects.get(id=note_id)
     note.delete()
+    return redirect('detail', game_id=game_id)
+
+@login_required
+def add_photo(request, game_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        url = f'{os.environ["S3_BASE_URL"]}{os.environ["S3_BUCKET"]}/{key}'
+        try:
+            s3.upload_fileobj(photo_file, os.environ['S3_BUCKET'], key)
+            Photo.objects.create(url=url, user_game_id=game_id)
+        except Exception as e:
+            print('Error Uploading to S3')
+            print('Exception message: ', e)
     return redirect('detail', game_id=game_id)
 
 def get_game(user_str):

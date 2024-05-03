@@ -44,3 +44,10 @@ class Note(models.Model):
     
     class Meta:
         ordering = ['date']
+
+class Photo(models.Model):
+    url = models.CharField(max_length=100)
+    user_game = models.ForeignKey(UserGame, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Photo for user_game: {self.user_game.name}'
