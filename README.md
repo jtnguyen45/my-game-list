@@ -5,6 +5,8 @@
 - Django
 - Python
 - PostgreSQL
+- Amazon S3
+- Materialize CSS
 
 ## Getting Started
 Access My Game List [here](https://my-game-list-jtnguyen45-7c12e6e9c889.herokuapp.com/).
